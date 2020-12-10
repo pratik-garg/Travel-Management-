@@ -6,7 +6,11 @@ import java.awt.event.ActionListener;
 import java.sql.*;
 
 public class UpdateCustomer extends JFrame implements ActionListener {
+<<<<<<< HEAD
 	JTextField t2,t3,t4,t5,t6,t7,t8,t9;
+=======
+	JTextField t1,t2,t3,t4,t5,t6,t7,t8,t9;
+>>>>>>> 6642eb361d8dae936bc0814bc00e5ed93353efc9
 	JComboBox c1;
 	JRadioButton r1,r2,r3,r4;
 	JButton b1, b2;
@@ -28,7 +32,11 @@ public class UpdateCustomer extends JFrame implements ActionListener {
 		l1.setFont(new Font("TAHOMA" , Font.PLAIN , 25));
 		add(l1);
 		
+<<<<<<< HEAD
 		JLabel t1 = new JLabel(us1);
+=======
+		t1 = new JTextField();
+>>>>>>> 6642eb361d8dae936bc0814bc00e5ed93353efc9
 		t1.setBounds(200,80,200,40);
 		add(t1);
 		
@@ -150,7 +158,11 @@ public class UpdateCustomer extends JFrame implements ActionListener {
 				String sql = "select * from customer where username ='"+us1+"'"; 
 				ResultSet rs = ck.st.executeQuery(sql);
 				while(rs.next()) {
+<<<<<<< HEAD
 				//	t1.setText(rs.getString("username"));
+=======
+					t1.setText(rs.getString("username"));
+>>>>>>> 6642eb361d8dae936bc0814bc00e5ed93353efc9
 					c1.setSelectedItem(rs.getString("id"));
 					t3.setText(rs.getString("number"));
 					t4.setText(rs.getString("name"));
@@ -169,7 +181,11 @@ public class UpdateCustomer extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent ae) {
 		if(ae.getSource() == b1) {
 			
+<<<<<<< HEAD
 		//	String username = t1.getText();
+=======
+			String username = t1.getText();
+>>>>>>> 6642eb361d8dae936bc0814bc00e5ed93353efc9
 			String id = (String)c1.getSelectedItem();
 			String number =  t3.getText();
 			String name = t4.getText();
@@ -188,7 +204,11 @@ public class UpdateCustomer extends JFrame implements ActionListener {
 			String address = t7.getText();
 			String phone =  t8.getText();
 			String email =   t9.getText();
+<<<<<<< HEAD
 			String sql = "update customer set  id = '"+id+"' ,number =  '"+number+"' , name =  '"+name+"' ,gender =  '"+gender+"' , country = '"+country+"' , address = '"+address+"' ,phone =  '"+phone+"' ,email =  '"+email+"' where username = '" +us1+"'";
+=======
+			String sql = "update customer set username = '"+username+"' , id = '"+id+"' ,number =  '"+number+"' , name =  '"+name+"' ,gender =  '"+gender+"' , country = '"+country+"' , address = '"+address+"' ,phone =  '"+phone+"' ,email =  '"+email+"' where username = '" +us1+"'";
+>>>>>>> 6642eb361d8dae936bc0814bc00e5ed93353efc9
 			try {
 				Conn c1 = new Conn();
 				c1.st.executeUpdate(sql);
@@ -199,6 +219,16 @@ public class UpdateCustomer extends JFrame implements ActionListener {
 		
 		else if (ae.getSource() == b2) {
 			this.setVisible(false);
+<<<<<<< HEAD
 		}
 	}
+=======
+			new Dashboard(us1).setVisible(true);
+		}
+	}
+	
+	public static  void main(String args[]) {
+		new UpdateCustomer("pandey_ustaad").setVisible(true);
+	}
+>>>>>>> 6642eb361d8dae936bc0814bc00e5ed93353efc9
 }

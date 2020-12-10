@@ -182,7 +182,11 @@ public class AddCustomer extends JFrame implements ActionListener {
 		
 		else if (ae.getSource() == b2) {
 			this.setVisible(false);
+<<<<<<< HEAD
 			//new Dashboard(us1).setVisible(true);
+=======
+			new Dashboard(us1).setVisible(true);
+>>>>>>> 6642eb361d8dae936bc0814bc00e5ed93353efc9
 		}
 	}
 }

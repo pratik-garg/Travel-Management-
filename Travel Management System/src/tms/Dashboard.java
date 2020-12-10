@@ -60,12 +60,19 @@ public class Dashboard  extends JFrame implements ActionListener{
 	//	b1.setMargin(new Insets(0,0,0,60));
 		p2.add(b1);
 		
+<<<<<<< HEAD
 		b2 = new JButton("UPDATE DETAILS");
+=======
+		b2 = new JButton("UPDATE PERSONAL DETAILS");
+>>>>>>> 6642eb361d8dae936bc0814bc00e5ed93353efc9
 		b2.setBackground(new Color(0,0,192));
 		b2.setFont(new Font("TAHOMA" , Font.PLAIN , 20));
 		b2.setForeground(Color.white);
 		b2.setBounds(0, 50, 300, 50);
+<<<<<<< HEAD
 		b2.addActionListener(this);
+=======
+>>>>>>> 6642eb361d8dae936bc0814bc00e5ed93353efc9
 		p2.add(b2);
 		
 		b3 = new JButton("VIEW DETAILS");
@@ -73,7 +80,10 @@ public class Dashboard  extends JFrame implements ActionListener{
 		b3.setFont(new Font("TAHOMA" , Font.PLAIN , 20));
 		b3.setForeground(Color.white);
 		b3.setBounds(0, 100, 300, 50);
+<<<<<<< HEAD
 		b3.addActionListener(this);
+=======
+>>>>>>> 6642eb361d8dae936bc0814bc00e5ed93353efc9
 		p2.add(b3);
 		
 		b4 = new JButton("DELETE PERSONAL DETAILS");
@@ -88,7 +98,10 @@ public class Dashboard  extends JFrame implements ActionListener{
 		b5.setFont(new Font("TAHOMA" , Font.PLAIN , 20));
 		b5.setForeground(Color.white);
 		b5.setBounds(0, 200, 300, 50);
+<<<<<<< HEAD
 		b5.addActionListener(this);
+=======
+>>>>>>> 6642eb361d8dae936bc0814bc00e5ed93353efc9
 		p2.add(b5);
 		
 		b6 = new JButton("BOOK PACKAGE");
@@ -179,6 +192,7 @@ public class Dashboard  extends JFrame implements ActionListener{
 				e.printStackTrace();
 			}
 		}
+<<<<<<< HEAD
 		else if (ae.getSource() == b2) {
 			try {
 				new UpdateCustomer(us1).setVisible(true);
@@ -197,6 +211,8 @@ public class Dashboard  extends JFrame implements ActionListener{
 			}catch(Exception e) {}
 			
 		}
+=======
+>>>>>>> 6642eb361d8dae936bc0814bc00e5ed93353efc9
 		else if(ae.getSource() == b13) {
 			try {
 				Runtime.getRuntime().exec("calc.exe");
