@@ -2,16 +2,20 @@ package tms;
 import java.sql.*;
 public class Conn {
 	Connection c;
-	Statement s;
-	public Conn() {
-		
+	Statement st;
+	public Conn(){
 		try {
+			String url = "jdbc:mysql://localhost:3306/tms?" + "autoReconnect=true&useSSL=false" ;
+			String user = "root" ;
+			String password = "password";
 			Class.forName("com.mysql.jdbc.Driver");
-			c = DriverManager.getConnection("jdbc:mysql://localhost:3306/tms?autoReconnect=true&useSSL=false" , "root" , "AppleOrange123");
-			System.out.println("Driver loaded!");
-			s = c.createStatement();
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
+			c = DriverManager.getConnection(url,user,password);
+			st = c.createStatement();
+		
+		/*	st.close();
+			c.close();
+		*/	
+		}catch(Exception e) {}
 	}
 }
+

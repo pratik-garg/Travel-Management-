@@ -2,16 +2,22 @@ package tms;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.sql.*;
 public class Signup extends JFrame implements ActionListener{
 	JButton b4,b5;
+	JTextField t1,t2,t5,t3;
+	//JPasswordField t3;
+	JComboBox c1;
 	Signup(){
 		setBounds(500,300,900,400);
 		getContentPane().setBackground(Color.white);
 		setLayout(null);
 		
 		JPanel p1 = new JPanel();
-				p1.setBackground(new Color(133,193,233));
-p1.setLayout(null);
+		p1.setBackground(new Color(133,193,233));
+		p1.setLayout(null);
 		p1.setBounds(0,0,500,400);
 		add(p1);
 		
@@ -20,7 +26,7 @@ p1.setLayout(null);
 		l1.setFont(new Font("TAHOMA", Font.BOLD, 16));
 		p1.add(l1);
 		
-		JTextField t1 = new JTextField();
+		t1 = new JTextField();
 		t1.setBounds(220,20,250,25);
 		t1.setBorder(BorderFactory.createEmptyBorder());
 		p1.add(t1);
@@ -30,7 +36,7 @@ p1.setLayout(null);
 		l2.setFont(new Font("TAHOMA", Font.BOLD, 16));
 		p1.add(l2);
 		
-		JTextField t2 = new JTextField();
+		t2 = new JTextField();
 		t2.setBounds(220,60,250,25);
 		t2.setBorder(BorderFactory.createEmptyBorder());
 		p1.add(t2);
@@ -40,7 +46,7 @@ p1.setLayout(null);
 		l3.setFont(new Font("TAHOMA", Font.BOLD, 16));
 		p1.add(l3);
 		
-		JPasswordField t3 = new JPasswordField();
+		t3 = new JTextField();
 		t3.setBounds(220,100,250,25);
 		t3.setBorder(BorderFactory.createEmptyBorder());
 		p1.add(t3);
@@ -50,11 +56,7 @@ p1.setLayout(null);
 		l4.setFont(new Font("TAHOMA", Font.BOLD, 16));
 		p1.add(l4);
 		
-		Choice c1 = new Choice();
-		c1.add("Your Favorite Color?");
-		c1.add("Your Favorite City?");
-		c1.add("Your First School teacher?");
-		c1.add("Your Childhood Superhero ?");
+		c1 = new JComboBox(new String[] {"Your Favorite Color?","Your Favorite City?","Your First School teacher?","Your Childhood Superhero ?"} );
 		c1.setBounds(220, 140,250,25);
 		c1.setBackground(Color.white);
 		c1.setForeground(Color.black);
@@ -66,7 +68,7 @@ p1.setLayout(null);
 		l5.setFont(new Font("TAHOMA", Font.BOLD, 16));
 		p1.add(l5);
 		
-		JTextField t5 = new JTextField();
+		t5 = new JTextField();
 		t5.setBounds(220,180,250,25);
 		t5.setBorder(BorderFactory.createEmptyBorder());
 		p1.add(t5);
@@ -94,18 +96,54 @@ p1.setLayout(null);
 	}
 	
 	public void actionPerformed(ActionEvent ae) {
+		Conn con  = new Conn();
+		try {
 		if(ae.getSource() == b4) {
+		/*	String username = t1.getText();
+			String name = t2.getText();
+			String password =  t3.getText();
+			String security = c1.getSelectedItem();
+			String answer = t5.getText();
+			*/
+			String sql = "insert into account (username,name,password,security,answer) values (?, ?, ?, ?, ?)";
+			//Conn con  = new Conn();
+		//	con.st.executeUpdate(query);
+			PreparedStatement st = con.c.prepareStatement(sql);
+
+			st.setString(1, t1.getText());
+	        st.setString(2, t2.getText());
+			st.setString(3, t3.getText());
+			st.setString(4, (String)c1.getSelectedItem());
+			st.setString(5, t5.getText());
+		//	System.out.println("here 1");
 			
+		//	Conn c = new Conn();
+		//	System.out.println("here 2");
+		//	c.st.executeUpdate(query);
+		//	System.out.println("here 3");
+			
+			int i = st.executeUpdate();
+			if (i > 0){
+	                    JOptionPane.showMessageDialog(null, "Account Created Successfully ");
+	                     
+	            			this.setVisible(false);
+	            			new Login().setVisible(true);
+	            	
+	            	}
+			
+	        t1.setText("");
+	        t2.setText("");
+			t3.setText("");
+			t5.setText("");
 		}
+	
 		else if(ae.getSource() == b5) {
 			this.setVisible(false);
 			new Login().setVisible(true);
 		}
 	}
-
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		new Signup().setVisible(true);
-	}
-
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+	}	
 }

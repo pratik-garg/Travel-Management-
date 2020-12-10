@@ -3,8 +3,11 @@ import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.event.*;
 import java.awt.*;
+import java.sql.*;
 public class Login extends JFrame implements ActionListener{
 			JButton b1,b2,b3;
+			JTextField t1;
+			JPasswordField t2;
 			Login(){
 			setLayout(null);
 			getContentPane().setBackground(Color.white);
@@ -33,7 +36,7 @@ public class Login extends JFrame implements ActionListener{
 			l2.setFont(new Font("SAN_SERIF" , Font.PLAIN , 20));
 			p2.add(l2);
 			
-			JTextField t1 = new JTextField();
+			t1 = new JTextField();
 			t1.setBounds(60, 50,250, 30);
 			t1.setBorder(BorderFactory.createEmptyBorder());
 			p2.add(t1);
@@ -43,7 +46,7 @@ public class Login extends JFrame implements ActionListener{
 			l3.setFont(new Font("SAN_SERIF" , Font.PLAIN , 20));
 			p2.add(l3);
 			
-			JPasswordField t2 = new JPasswordField();
+			t2 = new JPasswordField();
 			t2.setBounds(60, 150,250, 30);
 			t2.setBorder(BorderFactory.createEmptyBorder());
 			p2.add(t2);
@@ -76,8 +79,27 @@ public class Login extends JFrame implements ActionListener{
 			 
 		}
 		public void actionPerformed(ActionEvent ae) {
+			
 			if(ae.getSource() == b1) {
+				try {
+					String u1 = t1.getText();
+					String p1 = t2.getText();
+					String sql = "select * from account where username = '" + u1 + "' AND password = '" + p1 + "'";
+					Conn c3 = new Conn();
+					ResultSet rs = c3.st.executeQuery(sql);
+					if(rs.next() )
+					{
+						this.setVisible(false);
+						new Loading(u1).setVisible(true);
+					}
+					else {
+						JOptionPane.showMessageDialog(null, "Invalid Login");
+					}
+					
 				
+				}catch(Exception e) {
+					e.printStackTrace();
+				}
 			}
 			
 			else if(ae.getSource() == b2) {
@@ -85,8 +107,9 @@ public class Login extends JFrame implements ActionListener{
 				new Signup().setVisible(true);
 			}
 			
-			else {
-				
+			else if(ae.getSource() == b3) {
+				this.setVisible(false);
+				new ForgotPassword().setVisible(true);
 			}
 		}
 		public static void main(String args[]) {
