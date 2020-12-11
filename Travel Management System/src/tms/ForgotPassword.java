@@ -3,10 +3,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.sql.*;
-<<<<<<< HEAD
 
-=======
->>>>>>> 6642eb361d8dae936bc0814bc00e5ed93353efc9
 public class ForgotPassword extends JFrame implements ActionListener{
 	JTextField t1,t2,t3,t4,t5;
 	JButton b1,b2,b3;
@@ -132,10 +129,4 @@ public class ForgotPassword extends JFrame implements ActionListener{
 			new Login().setVisible(true);
 		}
 	}
-<<<<<<< HEAD
-=======
-	public static void main(String args[]) {
-		new ForgotPassword().setVisible(true);
-	}
->>>>>>> 6642eb361d8dae936bc0814bc00e5ed93353efc9
 }
