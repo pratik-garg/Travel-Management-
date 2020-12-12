@@ -21,7 +21,7 @@ class SplashFrame extends JFrame implements Runnable {
 	SplashFrame(){
 		
 	ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("tms/icons/splash.jpg"));
-	Image i2 = i1.getImage().getScaledInstance(1400, 800, Image.SCALE_DEFAULT);
+    Image i2 = i1.getImage().getScaledInstance(1400,900, Image.SCALE_DEFAULT);
 	ImageIcon i3 = new ImageIcon(i2);
 	JLabel l = new JLabel(i3);
 	add(l);

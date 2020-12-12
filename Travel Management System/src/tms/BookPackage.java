@@ -10,10 +10,10 @@ public class BookPackage extends JFrame implements ActionListener{
 	JLabel t2,t5,t6,t7,t8;
 	JComboBox c3;
 	JTextField t4;
-	String username;
+	String us11,final_price;
 	public BookPackage(String us1) {
 		// TODO Auto-generated constructor stub
-		this.username = us1;
+		this.us11 = us1;
 		setBounds(500,200,1100, 700);
 		setLayout(null);
 		getContentPane().setBackground(Color.white);
@@ -58,7 +58,7 @@ public class BookPackage extends JFrame implements ActionListener{
 		l4.setFont(new Font("TAHOMA" , Font.PLAIN , 25));
 		add(l4);
 		
-		t4 = new JTextField();
+		t4 = new JTextField("0");
 		t4.setBounds(280,210,200,30);
 		add(t4);
 		
@@ -117,7 +117,7 @@ public class BookPackage extends JFrame implements ActionListener{
 		b2.setBackground(Color.black);
 		b2.setFont(new Font("SAN_SERIF" , Font.PLAIN, 20));
 		b2.setForeground(Color.white);
-		//b2.addActionListener(this);
+		b2.addActionListener(this);
 		add(b2);
 		
 		b3 = new JButton("Back");
@@ -128,6 +128,21 @@ public class BookPackage extends JFrame implements ActionListener{
 		b3.addActionListener(this);
 		add(b3);
 		
+		
+		try {
+			Conn c10 = new Conn();
+			String sql = "select * from customer where username = '"+us11+"'";
+			ResultSet rs = c10.st.executeQuery(sql);
+			if(rs.next()) {
+				t2.setText(new String (rs.getString("username")));
+				t5.setText(new String (rs.getString("id")));
+				t6.setText(new String (rs.getString("number")));
+				t7.setText(new String (rs.getString("phone")));
+			}
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public void actionPerformed(ActionEvent ae) {
@@ -135,10 +150,21 @@ public class BookPackage extends JFrame implements ActionListener{
 		if(ae.getSource() == b1) {
 			try {
 				String p1 = (String)c3.getSelectedItem();
+				String p2 = t4.getText();
+			//	System.out.println(p2);
+				int no_of_persons=Integer.parseInt(p2);
 				String sql = "select * from packages where package = '"+p1+"'";
 				ResultSet rs = c9.st.executeQuery(sql);
+				if(no_of_persons == 0) {
+					JOptionPane.showMessageDialog(null,"Enter valid Number of persons");
+				}
 				if(rs.next()) {
-					t8.setText(new String(rs.getString("price")));
+					String x = rs.getString("price");
+					int x1 = Integer.parseInt(x);
+					int total_price = x1*no_of_persons;
+					String f = String.valueOf(total_price);
+					this.final_price = f;
+					t8.setText(f + " /- only");
 				}
 			}catch(Exception e){}
 		}
@@ -146,24 +172,34 @@ public class BookPackage extends JFrame implements ActionListener{
 		else if(ae.getSource() == b2) {
 		try {
 			String p1 = (String)c3.getSelectedItem();
-			int price=0;
-			String sql1 = "select * from packages where package = '"+p1+"'";
-			ResultSet rs1 = c9.st.executeQuery(sql1);
-			if(rs1.next()) {
-				price = rs1.getInt("price");
+			String p2 = t4.getText();
+		//  System.out.println(p2);
+			int no_of_persons=Integer.parseInt(p2);
+			String sql = "select * from packages where package = '"+p1+"'";
+			ResultSet rs = c9.st.executeQuery(sql);
+			if(no_of_persons == 0) {
+				JOptionPane.showMessageDialog(null,"Enter valid Number of persons");
 			}
-			String sql2 = "insert into bookpackage values ('"+this.username+"','"+p1+"','"+price+"')";
+			if(rs.next()) {
+					String x = rs.getString("price");
+					int x1 = Integer.parseInt(x);
+					int total_price = x1*no_of_persons;
+					String f = String.valueOf(total_price);
+					this.final_price = f;
+					t8.setText(f + " /- only");
+			}
+			
+			String sql2 = "insert into bookpackage values ('"+us11+"','"+p1+"','"+final_price+"' ,'"+p2+"')";
 			c9.st.executeUpdate(sql2);
 			JOptionPane.showMessageDialog(null, "Package Booked Successfully");
 			this.setVisible(false);
 		}catch(Exception e) {}
-		}
+	}
+		
+		
 		else if(ae.getSource() == b3){
 			this.setVisible(false);
 		}
 		
-	}
-	public static void main(String args[]) {
-		new BookPackage("pandey_usta").setVisible(true);
 	}
 }

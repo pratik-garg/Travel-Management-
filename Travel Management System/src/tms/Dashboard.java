@@ -104,6 +104,7 @@ public class Dashboard  extends JFrame implements ActionListener{
 		b7.setFont(new Font("TAHOMA" , Font.PLAIN , 20));
 		b7.setForeground(Color.white);
 		b7.setBounds(0, 300, 300, 50);
+		b7.addActionListener(this);
 		p2.add(b7);
 		
 		
@@ -201,7 +202,21 @@ public class Dashboard  extends JFrame implements ActionListener{
 		
 		else if (ae.getSource() == b6) {
 			try {
-				new BookPackage().setVisible(true);
+				new BookPackage(us1).setVisible(true);
+			}catch(Exception e) {}
+		}
+		
+		else if(ae.getSource() == b7) {
+			try {
+				Conn c1 = new Conn();
+				String sql = "select * from bookpackage where username  = '"+us1+"'";
+				ResultSet rs = c1.st.executeQuery(sql);
+				if(rs.next()) {
+					new ViewBookPackage(us1).setVisible(true);
+				}
+				else {
+					JOptionPane.showMessageDialog(null, "No Packages Booked");
+				}
 			}catch(Exception e) {}
 		}
 		else if(ae.getSource() == b13) {

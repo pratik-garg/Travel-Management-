@@ -16,6 +16,12 @@ public class ViewCustomer extends JFrame implements ActionListener {
 		getContentPane().setBackground(Color.white);
 		setLayout(null);
 		
+		JLabel cust = new JLabel("Customer Details");
+		cust.setBounds(250,20,500,30);
+		cust.setFont(new Font("SAN_SERIF",Font.BOLD,30));
+		cust.setForeground(Color.orange);
+		add(cust);
+		
 		
 		JLabel l1 = new JLabel("UserName :");
 		l1.setBounds(50,80,150,40);
@@ -189,7 +195,7 @@ public class ViewCustomer extends JFrame implements ActionListener {
 		*/
 		if (ae.getSource() == b2) {
 			this.setVisible(false);
-			new Dashboard(us).setVisible(true);
+			//new Dashboard(us).setVisible(true);
 		}
 	}
 	
