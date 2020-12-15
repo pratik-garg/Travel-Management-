@@ -197,7 +197,7 @@ public class ViewCustomer extends JFrame implements ActionListener {
 			this.setVisible(false);
 			//new Dashboard(us).setVisible(true);
 		}
-	}
+	} //this class will display customer details 
 	
 	public static  void main(String args[]) {
 		new ViewCustomer("pandey_usta").setVisible(true);
